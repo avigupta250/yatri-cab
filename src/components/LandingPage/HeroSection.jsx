@@ -23,13 +23,24 @@ export default function HeroSection() {
         <h1>Transparent Billing</h1>
         <p>GPS Based Billing | No km Tampering</p>
       </div>
+      <div className={styles.line}></div>
+
+
       <div>
-        <h1>Safety Guaranteed</h1>
-        <p>Well-Maintained Cars | Trained Drivers</p>
+        <h1 style={{
+          fontSize:"20px"
+        }}>Download Now!</h1>
+        <div style={{
+          display:"flex"
+        }}>
+          <img src="./google-play.png" alt="google-play"/>
+          <img src="./app-store.png" alt="app-stroe"/>
+        </div>
       </div>
+      <div className={styles.line}></div>
       <div>
         <h1>Best Prices</h1>
-        <p>Affordable Rides | No Hidden Charges</p>
+        <p>One-Way cab fare | No Hidden Charges</p>
       </div>
     </div>
   </div>
