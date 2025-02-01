@@ -1,24 +1,22 @@
 import styles from "./features.module.css";
-// import hand from "../../../public/hand.png"
-// import location from "../../../public/location.png"
-// import driving from "../../../public/driving.png"
+
 
 const benifits = [
   {
-    logo: "/hand.png", // Public folder image path
+    logo: "/hand.png", 
     title: "RETURN FARE, NOT FAIR!",
     description:
       "Why Pay For Return Journey When You Are Travelling One-Way? Now Get Discounted AC Taxi At Just Half Of The Round Trip Cost For Your Oneway Travel",
   },
   {
     logo: "/location.png",
-    title: "RETURN FARE, NOT FAIR!",
+    title: "GPS BASED BILLING SYSTEM",
     description:
-      "Why Pay For Return Journey When You Are Travelling One-Way? Now Get Discounted AC Taxi At Just Half Of The Round Trip Cost For Your Oneway Travel",
+      "Since the GPS data captures the actual distance and time traveled,   it reduce the chance of Kilometer tampering or discrepancies in billing.",
   },
   {
     logo: "/driving.png",
-    title: "RETURN FARE, NOT FAIR!",
+    title: "NOW AVAILABLE ROUTES ARE",
     description:
       "Why Pay For Return Journey When You Are Travelling One-Way? Now Get Discounted AC Taxi At Just Half Of The Round Trip Cost For Your Oneway Travel",
   },
@@ -106,14 +104,14 @@ export default function Features() {
         {benifits.map((benifit, index) => (
           <div key={index} className={styles.benifit}>
             <img src={benifit.logo} alt="logo" />
-            <h1>{benifit.title}</h1>
-            <p>{benifit.description}</p>
+            <h1 style={{fontSize:"28px"}}>{benifit.title}</h1>
+            <p style={{fontSize:"17px",lineHeight:"25px",fontWeight:400}}>{benifit.description}</p>
           </div>
         ))}
       </div>
 
       <div className={styles.description}>
-        <h1>India's Premier Intercity and Local Taxi Services</h1>
+        <h1>INDIA'S PREMIER INTERCITY AND LOCAL TAXI SERVICES</h1>
         <p>
           At Yatri Cabs, we pride ourselves on being a top-tier online cab
           booking service, delivering reliable and premium intercity and local
@@ -125,7 +123,7 @@ export default function Features() {
 
       {/* why yatri */}
       <div>
-        <h1>WHY YATRI</h1>
+        <h1 style={{color:"rgb(65, 65, 65)"}}>WHY<span style={{color:"rgb(22, 117, 22)"}}> YATRI ?</span></h1>
         <div className={styles.whyYatri}>
           <img src="./car.png" alt="car-image" />
           <div
@@ -142,7 +140,9 @@ export default function Features() {
                   <img src={benifits.image} alt="image" />
                 </div>
                 <div>
-                  <h1>{benifits.title}</h1>
+                  <h1 style={{
+                    color:"rgb(14, 99, 38)"
+                  }}>{benifits.title}</h1>
                   <p>{benifits.description}</p>
                 </div>
               </div>
@@ -180,8 +180,8 @@ export default function Features() {
       </div>
 
       {/* why choose one way cab */}
-      <div>
-        <h1>WHY CHOOSE ONE WAY CAB?</h1>
+      <div style={{padding:"10px"}}>
+        <h1 style={{fontSize:"64px", color:"rgb(9, 136, 41)"}}>WHY CHOOSE ONE WAY CAB?</h1>
         <div className={styles.whyChooseContainer}>
             <div >
                <div >
@@ -193,7 +193,7 @@ export default function Features() {
                </div>
             </div>
 
-                <img  src="./red-taxi.png" alt="red-taxi"/>
+                <img width={500}   src="./red-taxi.png" alt="red-taxi"/>
         
 
             <div>
@@ -207,9 +207,10 @@ export default function Features() {
                 </div>
             </div>
         </div>
+        
 
         <div>
-            <h1>Discover affordable travel with our seamless intercity car rentals in India – where excellence meets affordability with standardized rates in every city. Unleash your journey!</h1>
+            <h1 style={{fontSize:"35px",color:"#71766F",fontWeight:400,marginTop:"60px"}}>DISCOVER AFFORDABLE TRAVEL WITH OUR SEAMLESS <span style={{color:" #216900",fontWeight:500}}>INTERCITY CAR RENTAL </span> IN INIDA - WHERE EXCELLENCE MEETS AFFORDABLITY WITH STANDARIDIZED RATES IN EVERY CITY. UNLEASH YOUR JOURNEY</h1>
         </div>
       </div>
 

@@ -22,13 +22,29 @@ export default function Footer() {
           <div>
             <input style={{
                 position:"relative",
-                padding:"5px"
+                padding:"5px",
+                paddingLeft:"20px",
+                width:"400px",
+                border:"none",
+                borderRadius:"60px"
             }} type="email" placeholder="Email" />
             <button style={{
                 position:"absolute",
-                translate:131,
-                padding:"5px"
-            }}>Send</button>
+                translate:"350px",            
+                backgroundColor:"black",
+                color:"white",
+                border:"1px solid white",
+               borderRadius: "0 30px 30px 0",
+                padding:"3px",
+                paddingLeft:"20px",
+                paddingRight:"20px",
+                cursor:"pointer"
+                
+
+
+            }}>
+                <img  src="./arrow.png" alt="arrow"/>
+            </button>
           </div>
         </div>
 

@@ -28,7 +28,8 @@ export default function HeroSection() {
 
       <div>
         <h1 style={{
-          fontSize:"20px"
+          fontSize:"20px",
+          color:"green"
         }}>Download Now!</h1>
         <div style={{
           display:"flex"
@@ -39,7 +40,7 @@ export default function HeroSection() {
       </div>
       <div className={styles.line}></div>
       <div>
-        <h1>Best Prices</h1>
+        <h1>No return fare</h1>
         <p>One-Way cab fare | No Hidden Charges</p>
       </div>
     </div>

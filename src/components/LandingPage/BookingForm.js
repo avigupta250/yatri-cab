@@ -12,12 +12,80 @@ import {
 } from "../../lib/bookingSlice";
 
 import styles from "./bookingCard.module.css";
+import { useState } from "react";
+
+const cities = [
+  "Delhi",
+  "Mumbai",
+  "Bangalore",
+  "Chennai",
+  "Kolkata",
+  "Hyderabad",
+  "Pune",
+  "Ahmedabad",
+  "Jaipur",
+  "Lucknow",
+  "Indore",
+  "Chandigarh",
+  "Bhopal",
+  "Visakhapatnam",
+  "Goa",
+];
 
 const BookingForm = () => {
   const dispatch = useDispatch();
   const { tripType, serviceType, from, to, date, time, error } = useSelector(
     (state) => state.booking
   );
+
+  const [allCities, setAllCities] = useState(cities);
+
+  const [filteredCities, setFilteredCities] = useState(allCities);
+  const [showFromDropdown, setShowFromDropdown] = useState(false);
+  const [showToDropdown, setShowToDropdown] = useState(false);
+
+  const handleFromInputChange = (e) => {
+    const value = e.target.value;
+    dispatch(setFrom(value));
+
+    if (value.length > 0) {
+      const filtered = allCities.filter((city) =>
+        city.toLowerCase().startsWith(value.toLowerCase())
+      );
+      setFilteredCities(filtered);
+      setShowFromDropdown(true);
+    } else {
+      setFilteredCities(allCities);
+      setShowFromDropdown(true);
+    }
+  };
+
+  const handleFromSelectCity = (city) => {
+    dispatch(setFrom(city));
+    setFilteredCities(allCities);
+    setShowFromDropdown(false);
+  };
+  const handleToInputChange = (e) => {
+    const value = e.target.value;
+    dispatch(setTo(value));
+
+    if (value.length > 0) {
+      const filtered = allCities.filter((city) =>
+        city.toLowerCase().startsWith(value.toLowerCase())
+      );
+      setFilteredCities(filtered);
+      setShowToDropdown(true);
+    } else {
+      setFilteredCities(allCities);
+      setShowToDropdown(true);
+    }
+  };
+
+  const handleToSelectCity = (city) => {
+    dispatch(setTo(city));
+    setFilteredCities(allCities);
+    setShowToDropdown(false);
+  };
 
   const handleBooking = (e) => {
     e.preventDefault();
@@ -84,189 +152,89 @@ const BookingForm = () => {
         <div
           style={{
             display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-            gap: "100px",
-            marginBottom: "20px",
+            gap: "30px",
           }}
         >
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
-          >
-            <label
-              style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "black",
-
-                // marginBottom: "5px",
-              }}
-            >
-              FROM
+          {/* one way */}
+          <div className={styles.inputBox} style={{ position: "relative" }}>
+            <label className={styles.label}>
+              {serviceType === "local" ? "PICK UP CITY" : "FROM"}
             </label>
             <input
-              style={{
-                backgroundColor: "white",
-                border: "none",
-                color: "black",
-                borderBottom: "2px solid black",
-                fontSize: "16px",
-                outline: "none",
-                width: "100%",
-              }}
+              className={styles.input}
               type="text"
-              // placeholder="From"
               value={from}
-              onChange={(e) => dispatch(setFrom(e.target.value))}
+              onChange={handleFromInputChange}
+              onFocus={() => setShowFromDropdown(true)}
             />
+
+            {/* Dropdown List */}
+            {showFromDropdown && filteredCities.length > 0 && (
+              <ul className={styles.dropdown}>
+                {filteredCities.map((city, index) => (
+                  <li key={index} onClick={() => handleFromSelectCity(city)}>
+                    {city}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
 
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
-          >
-            <label
-              style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "black",
-                // marginBottom: "5px",
-              }}
-            >
-              TO
+          <div className={styles.inputBox} style={{ position: "relative" }}>
+          <label className={styles.label}>
+              {serviceType === "local" ? "PICK UP " : "TO"}
             </label>
             <input
-              style={{
-                backgroundColor: "white",
-                border: "none",
-                color: "black",
-                borderBottom: "2px solid black",
-                fontSize: "16px",
-                outline: "none",
-                width: "100%",
-              }}
+              className={styles.input}
               type="text"
-              // placeholder="To"
               value={to}
-              onChange={(e) => dispatch(setTo(e.target.value))}
+              onChange={handleToInputChange}
+              onFocus={() => setShowToDropdown(true)}
             />
+
+            {/* Dropdown List */}
+            {showToDropdown && filteredCities.length > 0 && (
+              <ul className={styles.dropdown}>
+                {filteredCities.map((city, index) => (
+                  <li key={index} onClick={() => handleToSelectCity(city)}>
+                    {city}
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         </div>
 
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            width: "100%",
-            gap: "100px",
-          }}
-        >
-          {/* pickup date */}
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
-          >
-            <label
-              style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "black",
-
-                // marginBottom: "5px",
-              }}
-            >
-              PICK UP DATE
-            </label>
+        {/* date and time */}
+        <div style={{ display: "flex", gap: "10px", marginTop: "30px" }}>
+          {/* date */}
+          <div className={styles.inputBox}>
+            <label className={styles.label}>PICK UP DATE</label>
             <input
-              style={{
-                backgroundColor: "white",
-                border: "none",
-                color: "black",
-                borderBottom: "2px solid black",
-                fontSize: "16px",
-                outline: "none",
-                width: "100%",
-              }}
+              className={styles.input}
               type="date"
               value={date}
               onChange={(e) => dispatch(setDate(e.target.value))}
             />
           </div>
-
           {/* return date */}
-          {tripType==="round-trip" &&serviceType === "outstation"&&
-           <div
-           style={{
-             display: "flex",
-             flexDirection: "column",
-             width: "50%",
-           }}
-         >
-           <label
-             style={{
-               fontSize: "14px",
-               fontWeight: "bold",
-               color: "black",
+          {tripType === "round-trip" && serviceType === "outstation" && (
+            <div className={styles.inputBox}>
+              <label className={styles.label}>RETURN DATE</label>
+              <input
+                className={styles.input}
+                type="date"
+                value={date}
+                onChange={(e) => dispatch(setDate(e.target.value))}
+              />
+            </div>
+          )}
 
-               // marginBottom: "5px",
-             }}
-           >
-            RETURN DATE
-           </label>
-           <input
-             style={{
-               backgroundColor: "white",
-               border: "none",
-               color: "black",
-               borderBottom: "2px solid black",
-               fontSize: "16px",
-               outline: "none",
-               width: "100%",
-             }}
-             type="date"
-             value={date}
-             onChange={(e) => dispatch(setDate(e.target.value))}
-           />
-         </div>}
-
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              width: "50%",
-            }}
-          >
-            <label
-              style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "black",
-                // marginBottom: "5px",
-              }}
-            >
-              PICK UP AT
-            </label>
+          {/* time */}
+          <div className={styles.inputBox}>
+            <label className={styles.label}>PICK UP At</label>
             <input
-            className={styles.input-time}
-              style={{
-                backgroundColor: "white",
-                border: "none",
-                color: "black",
-                borderBottom: "2px solid black",
-                fontSize: "16px",
-                outline: "none",
-                width: "100%",
-              }}
+              className={styles.input}
               type="time"
               value={time}
               onChange={(e) => dispatch(setTime(e.target.value))}
@@ -283,3 +251,196 @@ const BookingForm = () => {
 };
 
 export default BookingForm;
+
+// <div
+// style={{
+//   display: "flex",
+//   justifyContent: "space-between",
+//   width: "100%",
+//   gap: "100px",
+//   marginBottom: "20px",
+// }}
+// >
+// <div
+//   style={{
+//     display: "flex",
+//     flexDirection: "column",
+//     width: "50%",
+//   }}
+// >
+//   <label
+//     style={{
+//       fontSize: "14px",
+//       fontWeight: "bold",
+//       color: "black",
+
+//       // marginBottom: "5px",
+//     }}
+//   >
+//     FROM
+//   </label>
+//   <input
+//     style={{
+//       backgroundColor: "white",
+//       border: "none",
+//       color: "black",
+//       borderBottom: "2px solid black",
+//       fontSize: "16px",
+//       outline: "none",
+//       width: "100%",
+//     }}
+//     type="text"
+//     // placeholder="From"
+//     value={from}
+//     onChange={(e) => dispatch(setFrom(e.target.value))}
+//   />
+// </div>
+
+// <div
+//   style={{
+//     display: "flex",
+//     flexDirection: "column",
+//     width: "50%",
+//   }}
+// >
+//   <label
+//     style={{
+//       fontSize: "14px",
+//       fontWeight: "bold",
+//       color: "black",
+//       // marginBottom: "5px",
+//     }}
+//   >
+//     TO
+//   </label>
+//   <input
+//     style={{
+//       backgroundColor: "white",
+//       border: "none",
+//       color: "black",
+//       borderBottom: "2px solid black",
+//       fontSize: "16px",
+//       outline: "none",
+//       width: "100%",
+//     }}
+//     type="text"
+//     // placeholder="To"
+//     value={to}
+//     onChange={(e) => dispatch(setTo(e.target.value))}
+//   />
+// </div>
+// </div>
+
+// <div
+// style={{
+//   display: "flex",
+//   justifyContent: "space-between",
+//   width: "100%",
+//   gap: "100px",
+// }}
+// >
+// {/* pickup date */}
+// <div
+//   style={{
+//     display: "flex",
+//     flexDirection: "column",
+//     width: "50%",
+//   }}
+// >
+//   <label
+//     style={{
+//       fontSize: "14px",
+//       fontWeight: "bold",
+//       color: "black",
+
+//       // marginBottom: "5px",
+//     }}
+//   >
+//     PICK UP DATE
+//   </label>
+//   <input
+//     style={{
+//       backgroundColor: "white",
+//       border: "none",
+//       color: "black",
+//       borderBottom: "2px solid black",
+//       fontSize: "16px",
+//       outline: "none",
+//       width: "100%",
+//     }}
+//     type="date"
+//     value={date}
+//     onChange={(e) => dispatch(setDate(e.target.value))}
+//   />
+// </div>
+
+// {/* return date */}
+// {tripType==="round-trip" &&serviceType === "outstation"&&
+//  <div
+//  style={{
+//    display: "flex",
+//    flexDirection: "column",
+//    width: "50%",
+//  }}
+// >
+//  <label
+//    style={{
+//      fontSize: "14px",
+//      fontWeight: "bold",
+//      color: "black",
+
+//      // marginBottom: "5px",
+//    }}
+//  >
+//   RETURN DATE
+//  </label>
+//  <input
+//    style={{
+//      backgroundColor: "white",
+//      border: "none",
+//      color: "black",
+//      borderBottom: "2px solid black",
+//      fontSize: "16px",
+//      outline: "none",
+//      width: "100%",
+//    }}
+//    type="date"
+//    value={date}
+//    onChange={(e) => dispatch(setDate(e.target.value))}
+//  />
+// </div>}
+
+// <div
+//   style={{
+//     display: "flex",
+//     flexDirection: "column",
+//     width: "50%",
+//   }}
+// >
+//   <label
+//     style={{
+//       fontSize: "14px",
+//       fontWeight: "bold",
+//       color: "black",
+//       // marginBottom: "5px",
+//     }}
+//   >
+//     PICK UP AT
+//   </label>
+//   <input
+//   className={styles.input-time}
+//     style={{
+//       backgroundColor: "white",
+//       border: "none",
+//       color: "black",
+//       borderBottom: "2px solid black",
+//       fontSize: "16px",
+//       outline: "none",
+//       width: "100%",
+//     }}
+//     type="time"
+//     value={time}
+//     onChange={(e) => dispatch(setTime(e.target.value))}
+//   />
+// </div>
+// </div>
