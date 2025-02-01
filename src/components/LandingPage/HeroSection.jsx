@@ -2,10 +2,12 @@ import Head from "next/head";
 
 import BookingForm from "./BookingForm";
 import styles from "./bookingCard.module.css";
+import Header from "../Header";
 
 export default function HeroSection() {
   return (
     <div className={styles.bookingContainer}>
+     
     <div className={styles.heading}>
       INDIA'S{" "}
       <span className={styles.highlight}>LEADING ONE-WAY INTER-CITY</span>{" "}
