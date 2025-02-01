@@ -1,21 +1,121 @@
-
+.featureContainer{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 100px;
+    text-align: center;
+   /* padding: 60px; */
+  
+}
 
 .benifitContainer{
     display: flex;
-    padding: 20px;
+   
     margin-top: 100px;
-    gap: 20px;
+    gap:150px;
 
 }
 
 .benifit{
     display: flex;
     flex-direction: column;
-   
+ 
+   text-align: center;
     align-items: center;
    
 }
 .benifit h1{
+
     color: rgb(12, 96, 12);
     font-size: 30px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.description h1{
+ font-size: 50px;
+ color:rgb(54, 54, 54)
+}
+.description p{
+    font-size: 20px;
+    color: rgb(65, 65, 65);
+    line-height: 25px;
+    letter-spacing: 0.01cm;
+    margin-top: 30px;
+}
+
+.whyYatri{
+    display: flex;
+    gap: 100px;
+    margin-top: 50px;
+
+}
+
+.whyYatri img{
+ 
+    object-fit: contain;
+}
+
+.yatriBenifits{
+    display: flex;
+    text-align: start;
+    gap:20px;
+}
+.yatriBenifits img{
+    width: 60px;
+    height: 60px;
+    object-fit: contain;
+}
+.yatriBenifits h1{
+    font-size: 20px;
+}
+.yatriBenifits p{
+    font-size: 16px;
+}
+
+.specsContainer{
+    display: flex;
+    width: 100%;
+    padding: 0;
+    /* justify-content:space-evenly; */
+    gap:1px;
+    justify-content: space-between;
+    /* flex-direction: column; */
+}
+
+
+.carContainer{
+ 
+    background-color: rgb(28, 128, 28);
+}
+
+.carContainer h1{
+    color: white;
+    padding: 20px;
+    margin: 0;
+}
+
+.specs{
+    
+
+    background-color: rgb(158, 228, 158);
+}
+
+.specs h1{
+    padding:10px 30px;
+    color: black;
+    font-size: 25px;
+}
+
+
+
+.taxiContainer{
+    margin: 20px;
+    display: flex;
+    gap: 50px;
+    text-align: start;
+}
+
+.span{
+    color: green;
 }
