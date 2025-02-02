@@ -5,7 +5,6 @@ export default function Header() {
         padding: "25px",
         width:"100%",
        
-        // height:"150px"
       }}
     >
       <div
